@@ -10,13 +10,12 @@ const ProtectedRoute = ({ children }) => {
   const dispatch = useDispatch();
   const {user} = useSelector((state) => state.users);
   const navigate = useNavigate();
-  const url = 'http://localhost:5000';
   const validateToken = async () => {
     try {
       dispatch(ShowLoading());
       const tok = localStorage.getItem("token");  
       const response = await axios.post(
-        `${url}/api/users/get-user-by-id`,
+        '/api/users/get-user-by-id',
         {},
         {
           headers: {
