@@ -18,8 +18,8 @@ const Login = () => {
       if(response.data.success){
         message.success(response.data.message);
         localStorage.setItem("token",response.data.data);
-        // window.location.reload();
-        navigate("/");
+        window.location.href = "/";
+        // navigate("/");
       }else{
         message.error(response.data.message);
       }

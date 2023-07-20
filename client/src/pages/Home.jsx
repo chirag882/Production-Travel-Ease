@@ -5,6 +5,7 @@ import { axiosInstance } from "../helpers/axiosinstance";
 import { HideLoading, ShowLoading } from "../redux/alertsSlice";
 import { Col, message, Row } from "antd";
 import Bus from "../components/Bus";
+import axios from "axios";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -26,9 +27,14 @@ const Home = () => {
       dispatch(ShowLoading());
       // console.log(filters);
       // console.log(tempFilters);
-      const response = await axiosInstance.post(
+      const response = await axios.post(
         "/api/buses/get-all-buses",
-        tempFilters
+        tempFilters,
+        {
+          headers: {
+            Authorization : `Bearer ${localStorage.getItem("token")}`,
+        }
+        }
       );
       dispatch(HideLoading());
       if (response.data.success) {
